@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CoronaVirus-Tracker-Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Rastrea Coronavirus no seu Estado </h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <h1 class="display-4"  th:text="${totalReportedCases}"></h1>
+                <p class="lead">Total de casos relatados até hoje</p>
+                <hr class="my-4">
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <h1 class="display-4"  th:text="${totalDeaths}"></h1>
+                <p class="lead">Total de mortes relatados até hoje</p>
+                <hr class="my-4">
+            </div>
+        </div>
+        <div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Estado</th>
+                        <th>Número de Casos Confirmados</th>
+                        <th>Mortes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="locationStat : ${locationStats}">
+                        <td th:text="${locationStat.state}"></td>
+                        <td th:text="${locationStat.cases}"></td>
+                        <td th:text="${locationStat.deaths}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
