@@ -53,8 +53,9 @@ public class CoronaVirusDataService {
         for (CSVRecord record : records) {
                 LocationStats locationStats = new LocationStats();
 
-                locationStats.setDate(formatter.format(LocalDate.parse(record.get(record.size()-7))));
-                locationStats.setState(record.get(record.size()-5));
+                locationStats.setDate(formatter.format(LocalDate.parse(record.get(record.size()-5))));
+                locationStats.setRegion(record.get(record.size()-4));
+                locationStats.setState(record.get(record.size()-3));
                 locationStats.setCases(Integer.parseInt(record.get(record.size()-2)));
                 locationStats.setDeaths(Integer.parseInt(record.get(record.size()-1)));
 
@@ -62,7 +63,18 @@ public class CoronaVirusDataService {
                 newStats.add(locationStats);
         }
 
-        this.allStats = newStats.stream().filter(p->p.getDate().equals("21-03-2020")).flatMap(Stream::of).collect(Collectors.toList());
+        this.allStats = newStats.stream().filter(p->p.getDate().equals("06-04-2020")).flatMap(Stream::of).collect(Collectors.toList());
+    }
+
+    public List<LocationStats> searchLocation(String theSearchName) {
+        List<LocationStats> search = new ArrayList<>();
+        for (LocationStats locationStats : allStats) {
+            if (locationStats.getState().equals(theSearchName)) {
+                search.add(locationStats);
+                return search;
+            }
+        }
+        return null;
     }
 }
 

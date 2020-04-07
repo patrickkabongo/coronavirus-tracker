@@ -5,8 +5,17 @@ public class LocationStats {
 
     private String state;
     private String date;
+    private String region;
     private int cases;
     private int deaths;
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     public String getState() {
         return state;

@@ -8,13 +8,19 @@
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <style>
+        .pesq{
+            margin-bottom: 10px
+            }
+    </style>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
-        <h1 class="text-center">Rastrea Coronavirus no seu Estado </h1>
+        <h1 class="text-center">Coronavirus no Brasil </h1>
         <hr>
 
         <div class="row">
@@ -30,9 +36,17 @@
             </div>
         </div>
         <div>
+            <form class="form-inline pesq" action="#" th:action="@{/search}"  th:object="${locationStats}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Pesquise por estado" aria-label="Search"
+                    name="theSearchName">
+                <button class="btn btn-dark my-2 my-sm-0" type="submit">Pesquisa</button>
+            </form>
+        </div>
+        <div>
             <table class="table table-striped table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
+                        <th>Região</th>
                         <th>Estado</th>
                         <th>Número de Casos Confirmados</th>
                         <th>Mortes</th>
@@ -40,6 +54,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="locationStat : ${locationStats}">
+                        <td th:text="${locationStat.region}"></td>
                         <td th:text="${locationStat.state}"></td>
                         <td th:text="${locationStat.cases}"></td>
                         <td th:text="${locationStat.deaths}"></td>
